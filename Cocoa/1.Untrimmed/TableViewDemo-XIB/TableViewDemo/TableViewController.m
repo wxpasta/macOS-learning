@@ -28,6 +28,10 @@
     return self;
 }
 
+/*
+ 设置Content Mode为Cell Bassed
+ */
+#pragma mark -
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
     return self.list.count;
 }
@@ -35,9 +39,8 @@
 - (id)tableView:(NSTableView *)tableView
 objectValueForTableColumn:(NSTableColumn *)tableColumn
             row:(NSInteger)row {
-    
-    Person *p = [self.list objectAtIndex:row];
-    NSString *identifier = [tableColumn identifier];
+    Person *p = self.list[row];
+    NSString *identifier = tableColumn.identifier;
     return [p valueForKey:identifier];
 }
 
@@ -48,8 +51,8 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 }
 
 - (IBAction)add:(id)sender {
-    Person *p = [[Person alloc] init];
-    [self.list addObject:p];
+    Person *person = [[Person alloc] init];
+    [self.list addObject:person];
     [self.tableView reloadData];
 }
 
